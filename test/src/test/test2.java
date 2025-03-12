@@ -1,7 +1,9 @@
 package test;
 
 public class test2 {
-	private void mian() {
+	public static void main(String[] args) {
 		System.out.println("abc");
+		
 	}
 }
+
