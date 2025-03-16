@@ -8,9 +8,14 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JFrame;
+
 import model.SinhVien;
 
-public class DatabaseConnection {
+public class DatabaseConnection extends JFrame {
+
+
+
 	public static void main(String[] args) {
 
 		try {
@@ -29,24 +34,20 @@ public class DatabaseConnection {
 			Statement stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery(sqlSelect);
 
-			
 			// Danh sách để lưu sinh viên
-            List<SinhVien> danhSachSinhVien = new ArrayList<>();
+			List<SinhVien> danhSachSinhVien = new ArrayList<>();
 
-            // Lặp qua từng dòng kết quả
-            while (rs.next()) {
-                SinhVien sv = new SinhVien(
-                        rs.getString("MaSV"), 
-                        rs.getNString("TenSV"), 
-                        rs.getNString("DiaChi"), 
-                        rs.getString("Phone"));
-                danhSachSinhVien.add(sv);
-            }
+			// Lặp qua từng dòng kết quả
+			while (rs.next()) {
+				SinhVien sv = new SinhVien(rs.getString("MaSV"), rs.getNString("TenSV"), rs.getNString("DiaChi"),
+						rs.getString("Phone"));
+				danhSachSinhVien.add(sv);
+			}
 
-            // In danh sách sinh viên
-            for (SinhVien sv : danhSachSinhVien) {
-                System.out.println(sv.toString());
-            }
+			// In danh sách sinh viên
+			for (SinhVien sv : danhSachSinhVien) {
+				System.out.println(sv.toString());
+			}
 			// In kết quả
 //			while (rs.next()) {
 //				System.out.println(rs.getString(1));
@@ -54,6 +55,7 @@ public class DatabaseConnection {
 //				System.out.println(rs.getString(3));
 //				System.out.println(rs.getString(4));
 //			}
+
 			// Đóng tài nguyên
 			rs.close();
 			stmt.close();
